@@ -15,6 +15,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;b
 .sub-title{font-size:1.4rem;color:var(--tm);font-weight:500;margin-bottom:60px;max-width:600px;z-index:2;position:relative}
 .start-btn{font-size:1.4rem;padding:22px 60px;border-radius:50px;background:linear-gradient(135deg,var(--p),var(--pd));color:white;border:none;cursor:pointer;box-shadow:0 10px 20px -5px rgba(37,99,235,0.4);transition:all .3s ease;font-weight:800;z-index:2;position:relative}
 .start-btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 15px 30px -5px rgba(37,99,235,0.5)}
+/* Math Symbols Decor */
 .math-decor { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
 .sym { position: absolute; font-weight: 900; color: var(--p); opacity: 0.08; user-select: none; }
 .sym-plus { top: -10%; left: -5%; font-size: 15rem; transform: rotate(-15deg); }
@@ -44,6 +45,7 @@ header h1{margin:0;font-size:2rem;font-weight:900;color:var(--pd);letter-spacing
 .bdg{font-size:.8rem;font-weight:800;color:var(--p);text-transform:uppercase;background:var(--pl);padding:6px 10px;border-radius:6px}
 .pts{font-size:.8rem;font-weight:700;color:var(--tm);background:#f1f5f9;padding:6px 10px;border-radius:6px}
 
+/* QUESTIONS & AUDIO */
 .q-box{display:flex;flex-direction:column;gap:15px;margin-bottom:28px; padding: 20px; border-radius: 12px; border: 2px solid transparent; transition: all 0.2s;}
 .q-header-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
 .q-txt{font-size:1.4rem;font-weight:700;color:var(--t);line-height:1.4;}
@@ -52,11 +54,13 @@ header h1{margin:0;font-size:2rem;font-weight:900;color:var(--pd);letter-spacing
     background: #fff; border: 1px solid var(--b); color: var(--p);
     padding: 6px 14px; border-radius: 20px; cursor: pointer;
     font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;
-    transition: all 0.2s; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0;
+    transition: all 0.2s; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    flex-shrink: 0;
 }
 .tts-btn:hover { background: var(--pl); border-color: var(--p); transform: translateY(-1px); box-shadow: 0 4px 6px rgba(0,0,0,0.08); }
 .tts-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
+/* HIGHLIGHTING EFFECT */
 .highlight-active { background-color: var(--wab) !important; border-color: var(--a) !important; box-shadow: 0 0 0 1px var(--a) !important; }
 
 input[type=text]{width:100%;max-width:280px;padding:14px;font-size:1.1rem;border:2px solid var(--b);border-radius:8px;outline:0;background:#f8fafc;color:var(--t);font-weight:500}
@@ -106,6 +110,7 @@ tr.highlight-active td { background-color: var(--wab) !important; border-top: 1p
 </head>
 <body>
 <div class="container">
+    
     <div id="title-page">
         <div class="math-decor">
             <div class="sym sym-plus">+</div><div class="sym sym-minus">&minus;</div><div class="sym sym-mult">&times;</div><div class="sym sym-div">&divide;</div>
@@ -178,32 +183,32 @@ tr.highlight-active td { background-color: var(--wab) !important; border-top: 1p
         { id: 3, type: 'rad', text: "Select the equation that has the same unknown number as 108 ÷ 12 = □.", options: ["12 × 108 = □", "108 × □ = 12", "12 × □ = 108", "□ × 108 = 12"], answer: 2, explanation: "12 × □ = 108." },
         { id: 4, type: 'chk', text: "Select all TRUE statements for numbers: 5472, 5283, 5491, 5264.", options: ["5472 > 5491 because the digit in the tens place is larger in 5472.", "5283 > 5264 because the digit in the tens place is larger in 5283.", "5264 < 5472 because the digit in the hundreds place is smaller in 5264.", "5491 < 5283 because the digit in the hundreds place is smaller in 5491."], answer: [1, 2], explanation: "Compare digits." },
         { id: 5, type: 'text', text: "Enter the product.", html: `<div class="v-math"><div class="v-top">48</div><div class="v-op">×</div><div class="v-bot">30</div><div class="v-line"></div></div>`, answer: ["1440", "1,440"], explanation: "48 × 30 = 1440." },
-        { id: 6, type: 'rad', text: "Which expression is equal to 12 × 23?", options: ["(10 + 2) + (20 + 3)", "(10 × 2) + (20 × 3)", "(10 + 2) × (20 + 3)", "(10 × 2) × (20 × 3)"], answer: 2, explanation: "(10+2)×(20+3)." },
+        { id: 6, type: 'rad', text: "Which expression is equal to 12 × 23?", options: ["(10 + 2) + (20 + 3)", "(10 × 2) + (20 × 3)", "(10 + 2) × (20 + 3)", "(10 × 2) × (20 × 3)"], answer: 2, explanation: "(10+2)×(20+3)."},
         { id: 7, type: 'text', text: "Round 3,942 to the nearest ten.", answer: ["3940", "3,940"], explanation: "The 2 rounds down." },
         { id: 8, type: 'text', text: "Enter the sum.", html: `<div class="v-math"><div class="v-top">5827</div><div class="v-op">+</div><div class="v-bot">3492</div><div class="v-line"></div></div>`, answer: ["9319", "9,319"], explanation: "Sum is 9,319." },
-        { id: 9, type: 'rad', text: "Select the equation with same unknown as 96 ÷ 3 = □.", options: ["3 × 96 = □", "96 × □ = 3", "3 × □ = 96", "□ × 96 = 3"], answer: 2, explanation: "3 × □ = 96." },
-        { id: 10, type: 'text', text: "What digit makes 57,420 > 57,4□5 true?", html: `<h3>57,420 > 57,4 <input type="text" style="width:40px;text-align:center" disabled placeholder="?"> 5</h3>`, answer: ["0", "1"], explanation: "The tens digit must be less than 2." },
+        { id: 9, type: 'rad', text: "Select the equation that has the same unknown number as 96 ÷ 3 = □.", options: ["3 × 96 = □", "96 × □ = 3", "3 × □ = 96", "□ × 96 = 3"], answer: 2, explanation: "3 × □ = 96." },
+        { id: 10, type: 'text', text: "What digit makes 57,420 > 57,4□5 true?", html: `<h3>57,420 > 57,4 <input type="text" style="width:40px;text-align:center" disabled placeholder="?"> 5</h3>`, answer: ["0", "1"], explanation: "Tens digit must be less than 2." },
         { id: 11, type: 'text', text: "Round 639,854 to nearest thousand.", answer: ["640000", "640,000"], explanation: "9854 rounds up -> 640,000." },
         { id: 12, type: 'mat', text: "Select True or False.", rows: [{ t: "582 < 500 + 90 + 2", c: "true" }, { t: "4 hundreds + 12 tens = 5 hundreds + 2 tens", c: "true" }, { t: "700 + 40 + 5 < 739", c: "false" }], explanation: "Compare sides." },
-        { id: 13, type: 'rad', text: "Which expression is equal to 18 × 14?", options: ["(10 × 10) + (10 × 8) + (10 × 4)", "(10 + 8) × (10 + 4)", "(10 × 8) + (10 × 4)", "(10 + 8) + (10 + 4)"], answer: 1, explanation: "(10+8)(10+4)." },
-        { id: 14, type: 'rad', text: "Which statement is always true when multiplying two 2-digit numbers?", options: ["Multiplying numbers less than 20 always gives 4 digits.", "Multiplying numbers less than 30 always gives 3 digits.", "Multiplying numbers greater than 31 always gives 4 digits.", "Multiplying numbers greater than 10 always gives 3 digits."], answer: 2, explanation: "32x32=1024." },
+        { id: 13, type: 'rad', text: "Which expression is equal to 18 × 14?", options: ["(10×10)+(10×8)+(10×4)", "(10+8)×(10+4)", "(10×8)+(10×4)", "(10+8)+(10+4)"], answer: 1, explanation: "(10+8)(10+4)." },
+        { id: 14, type: 'rad', text: "Which statement is always true when multiplying two 2-digit numbers?", options: ["Multiplying numbers less than 20 always gives 4 digits.", "Multiplying numbers less than 30 always gives 3 digits.", "Multiplying numbers greater than 31 always gives 4 digits.", "Multiplying numbers greater than 10 always gives 3 digits."], answer: 2, explanation: "32x32=1024."},
         { id: 15, type: 'mat', text: "Select True or False.", rows: [{ t: "842 = 800 + 40 + 2", c: "true" }, { t: "5 hundreds + 2 tens = 52 tens", c: "true" }, { t: "300 + 60 + 8 > 369", c: "false" }], explanation: "Compare." }
     ];
 
     const dataSetC = [
         { id: 1, type: 'text', text: "Enter the sum.", html: `<div class="v-math"><div class="v-top">5184</div><div class="v-op">+</div><div class="v-bot">927</div><div class="v-line"></div></div>`, answer: ["6111", "6,111"], explanation: "5184 + 927 = 6,111." },
-        { id: 2, type: 'chk', text: "Lucas earned 400 tickets. Select all combinations of items he could buy with her tickets.", subtext: "Prices: Eraser(20), Pen(30), Notebook(50), Folder(40), Binder(80)", options: ["5 Binders", "4 Notebooks and 5 Folders", "8 Notebooks", "10 Pens and 2 Erasers"], answer: [0, 1, 2, 3], explanation: "Check total cost. He can afford any option that costs 400 or less." },
+        { id: 2, type: 'chk', text: "Lucas earned 400 tickets. Select all combinations of items he could buy with his tickets.", subtext: "Prices: Eraser(20), Pen(30), Notebook(50), Folder(40), Binder(80)", options: ["5 Binders", "4 Notebooks and 5 Folders", "8 Notebooks", "10 Pens and 2 Erasers"], answer: [0, 1, 2, 3], explanation: "Check total cost. He can afford any option that costs 400 or less." },
         { id: 3, type: 'rad', text: "Select the equation that has the same unknown number as 132 ÷ 11 = □.", options: ["132 × □ = 11", "11 × □ = 132", "11 × 132 = □", "□ × 132 = 11"], answer: 1, explanation: "11 × □ = 132." },
         { id: 4, type: 'chk', text: "Select all TRUE statements for numbers: 6382, 6154, 6391, 6129.", options: ["6382 > 6154 because the digit in the hundreds place is larger in 6382.", "6129 > 6391 because the digit in the tens place is larger in 6129.", "6154 < 6382 because the digit in the hundreds place is smaller in 6154.", "6391 < 6129 because the digit in the tens place is smaller in 6391."], answer: [0, 2], explanation: "Compare digits." },
         { id: 5, type: 'text', text: "Enter the product.", html: `<div class="v-math"><div class="v-top">64</div><div class="v-op">×</div><div class="v-bot">40</div><div class="v-line"></div></div>`, answer: ["2560", "2,560"], explanation: "64 × 4 = 256, add 0 -> 2560." },
         { id: 6, type: 'rad', text: "Which expression is equal to 13 × 22?", options: ["(10 + 3) × (20 + 2)", "(10 × 3) + (20 × 2)", "(10 + 20) × (3 + 2)", "None"], answer: 0, explanation: "Decompose: (10+3) × (20+2)." },
         { id: 7, type: 'text', text: "Round 4,826 to the nearest ten.", answer: ["4830", "4,830"], explanation: "6 rounds up." },
         { id: 8, type: 'text', text: "Enter the sum.", html: `<div class="v-math"><div class="v-top">4928</div><div class="v-op">+</div><div class="v-bot">2183</div><div class="v-line"></div></div>`, answer: ["7111", "7,111"], explanation: "Sum is 7,111." },
-        { id: 9, type: 'rad', text: "Select the equation with same unknown as 84 ÷ 4 = □.", options: ["4 × □ = 84", "84 × □ = 4", "□ × 84 = 4", "4 × 84 = □"], answer: 0, explanation: "4 × □ = 84." },
-        { id: 10, type: 'text', text: "What digit makes 63,520 > 63,5□8 true?", html: `<h3>63,520 > 63,5 <input type="text" style="width:40px;text-align:center" disabled placeholder="?"> 8</h3>`, answer: ["0", "1"], explanation: "The tens digit must be less than 2." },
+        { id: 9, type: 'rad', text: "Select the equation that has the same unknown number as 84 ÷ 4 = □.", options: ["4 × □ = 84", "84 × □ = 4", "□ × 84 = 4", "4 × 84 = □"], answer: 0, explanation: "4 × □ = 84." },
+        { id: 10, type: 'text', text: "What digit makes 63,520 > 63,5□8 true?", html: `<h3>63,520 > 63,5 <input type="text" style="width:40px;text-align:center" disabled placeholder="?"> 8</h3>`, answer: ["0", "1"], explanation: "Tens digit < 2." },
         { id: 11, type: 'text', text: "Round 519,632 to nearest thousand.", answer: ["520000", "520,000"], explanation: "9632 rounds up -> 520,000." },
         { id: 12, type: 'mat',text: "Select True or False.", rows: [{ t: "743 < 700 + 40 + 3", c: "false" }, { t: "620 = 500 + 120", c: "true" }, { t: "905 > 899 + 10", c: "false" }], explanation: "Compare values." },
-        { id: 13, type: 'rad', text: "Which expression is equal to 16 × 13?", options: ["(10 × 10) + (10 × 3) + (6 × 10) + (6 × 3)", "(10 + 6) + (10 + 3)", "(10 × 6) × (10 × 3)", "(10 + 6) + (10 + 3)"], answer: 0, explanation: "Area model decomposition." },
+        { id: 13, type: 'rad', text: "Which expression is equal to 16 × 13?", options: ["(10×10)+(10×3)+(6×10)+(6×3)", "(10+6)+(10+3)", "(10×6)×(10×3)", "(10+6)+(10+3)"], answer: 0, explanation: "Area model decomposition." },
         { id: 14, type: 'rad', text: "Which statement is always true when multiplying two 2-digit numbers?", options: ["Product < 100", "Product > 100", "Product > 1000", "The product has 3 or 4 digits."], answer: 3, explanation: "10x10=100 (3), 99x99=9801 (4)." },
         { id: 15, type: 'mat', text: "Select True or False.", rows: [{ t: "529 = 500 + 20 + 9", c: "true" }, { t: "3 hundreds < 290", c: "false" }, { t: "450 + 50 = 5 hundreds", c: "true" }], explanation: "Compare." }
     ];
@@ -278,8 +283,10 @@ tr.highlight-active td { background-color: var(--wab) !important; border-top: 1p
             
             currentQ = 0;
             earnedPoints = 0;
+            
+            // FIXED LOGIC: Count rows for matrix questions
             totalPointsPossible = activeQuestions.reduce((sum, q) => {
-                if (q.type === 'matrix') return sum + q.rows.length;
+                if (q.type === 'mat') return sum + q.rows.length; // Correctly adds 3 pts
                 return sum + 1;
             }, 0);
 
@@ -304,7 +311,7 @@ tr.highlight-active td { background-color: var(--wab) !important; border-top: 1p
         const card = document.createElement('div');
         card.className = 'q-card active';
 
-        let maxPts = (q.type === 'matrix') ? q.rows.length : 1;
+        let maxPts = (q.type === 'mat') ? q.rows.length : 1;
 
         let html = `
             <div class="meta">
