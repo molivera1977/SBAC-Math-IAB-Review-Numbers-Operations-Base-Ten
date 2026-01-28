@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBAC Math Review: Numbers and Operations In Base Ten</title>
+<style>
+/* --- PROFESSIONAL THEME --- */
+:root{--p:#2563eb;--pd:#1e40af;--pl:#eff6ff;--a:#fbbf24;--bg:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 50%,#93c5fd 100%);--c:rgba(255,255,255,0.98);--t:#0f172a;--tm:#64748b;--b:#e2e8f0;--ok:#10b981;--okb:#ecfdf5;--wa:#f59e0b;--wab:#fffbeb;--er:#ef4444;--erb:#fef2f2}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--t);margin:0;padding:20px;min-height:100vh;display:flex;flex-direction:column;align-items:center;background-attachment:fixed}
+.container{width:100%;max-width:900px;background:var(--c);backdrop-filter:blur(10px);border-radius:16px;box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);overflow:hidden;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,0.3);min-height:600px;position:relative}
+
+/* --- TITLE PAGE --- */
+#title-page{padding:40px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;flex:1;animation:fadeIn .5s ease;position:relative;overflow:hidden}
+.main-title{font-size:3.5rem;font-weight:900;color:var(--pd);line-height:1.1;margin-bottom:10px;letter-spacing:-0.03em;z-index:2;position:relative}
+.sub-title{font-size:1.4rem;color:var(--tm);font-weight:500;margin-bottom:60px;max-width:600px;z-index:2;position:relative}
+.start-btn{font-size:1.4rem;padding:22px 60px;border-radius:50px;background:linear-gradient(135deg,var(--p),var(--pd));color:white;border:none;cursor:pointer;box-shadow:0 10px 20px -5px rgba(37,99,235,0.4);transition:all .3s ease;font-weight:800;z-index:2;position:relative}
+.start-btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 15px 30px -5px rgba(37,99,235,0.5)}
+.math-decor { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+.sym { position: absolute; font-weight: 900; color: var(--p); opacity: 0.08; user-select: none; }
+.sym-plus { top: -10%; left: -5%; font-size: 15rem; transform: rotate(-15deg); }
+.sym-minus { top: 10%; right: -5%; font-size: 12rem; transform: rotate(15deg); }
+.sym-mult { bottom: -10%; left: 5%; font-size: 14rem; transform: rotate(10deg); }
+.sym-div { bottom: 10%; right: 10%; font-size: 10rem; transform: rotate(-10deg); }
+
+/* --- HEADER & NAV --- */
+header{background:#fff;padding:25px 40px;border-bottom:1px solid var(--b);display:none;justify-content:space-between;align-items:center}
+header h1{margin:0;font-size:2rem;font-weight:900;color:var(--pd);letter-spacing:-.02em;text-transform:uppercase;line-height:1;max-width:75%}
+.reset-btn{background:0 0;border:1px solid var(--b);color:var(--tm);padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer;transition:.2s;white-space:nowrap}
+.reset-btn:hover{background:var(--erb);color:var(--er);border-color:var(--er)}
+.pg-bar{width:100%;height:8px;background:var(--b);display:none}.pg-fill{height:100%;background:linear-gradient(90deg,var(--p),#60a5fa);width:0%;transition:width .4s ease}
+
+/* --- SELECTION SCREEN --- */
+#welcome{padding:60px 40px;text-align:center;display:none}
+.hero-t{font-size:2rem;color:var(--pd);margin-bottom:10px;font-weight:800}.hero-s{color:var(--tm);margin-bottom:50px;font-size:1.1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#fff;border:2px solid var(--b);border-radius:12px;padding:30px;text-align:left;cursor:pointer;transition:.2s}
+.card:hover{border-color:var(--p);background:var(--pl);transform:translateY(-4px);box-shadow:0 10px 15px -3px rgba(37,99,235,0.1)}
+.card h3{margin:0 0 8px;font-size:1.2rem;color:var(--pd);font-weight:800}.card p{margin:0;font-size:.95rem;color:var(--tm)}.icon{font-size:2rem;margin-bottom:15px;display:block}
+
+/* --- QUIZ --- */
+.q-card{padding:40px;display:none;animation:fadeIn .4s ease-out}.q-card.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;border-bottom:2px solid #f1f5f9;padding-bottom:15px}
+.bdg{font-size:.8rem;font-weight:800;color:var(--p);text-transform:uppercase;background:var(--pl);padding:6px 10px;border-radius:6px}
+.pts{font-size:.8rem;font-weight:700;color:var(--tm);background:#f1f5f9;padding:6px 10px;border-radius:6px}
+
+.q-box{display:flex;flex-direction:column;gap:15px;margin-bottom:28px; padding: 20px; border-radius: 12px; border: 2px solid transparent; transition: all 0.2s;}
+.q-header-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
+.q-txt{font-size:1.4rem;font-weight:700;color:var(--t);line-height:1.4;}
+
+.tts-btn {
+    background: #fff; border: 1px solid var(--b); color: var(--p);
+    padding: 6px 14px; border-radius: 20px; cursor: pointer;
+    font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;
+    transition: all 0.2s; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0;
+}
+.tts-btn:hover { background: var(--pl); border-color: var(--p); transform: translateY(-1px); box-shadow: 0 4px 6px rgba(0,0,0,0.08); }
+.tts-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+.highlight-active { background-color: var(--wab) !important; border-color: var(--a) !important; box-shadow: 0 0 0 1px var(--a) !important; }
+
+input[type=text]{width:100%;max-width:280px;padding:14px;font-size:1.1rem;border:2px solid var(--b);border-radius:8px;outline:0;background:#f8fafc;color:var(--t);font-weight:500}
+input[type=text]:focus{border-color:var(--p);background:#fff;box-shadow:0 0 0 4px var(--pl)}
+
+.opts{display:grid;gap:14px}
+.lbl{display:flex;align-items:center;justify-content: space-between; padding:16px 20px;gap:15px;border:2px solid var(--b);border-radius:10px;cursor:pointer;background:#fff;transition:.2s}
+.lbl:hover{border-color:var(--p);background:#f8fafc}
+.lbl:has(input:checked){border-color:var(--p);background:var(--pl);box-shadow:0 0 0 1px var(--p)}
+.lbl-content { display: flex; align-items: center; gap: 15px; flex-grow: 1; }
+
+input[type=radio],input[type=checkbox]{accent-color:var(--p);width:1.25em;height:1.25em;cursor:pointer}
+
+.mx-box{overflow-x:auto;border:2px solid var(--b);border-radius:10px;margin-top:15px}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th,td{padding:16px 20px;border-bottom:1px solid var(--b);text-align:center}
+th{background:#f8fafc;font-weight:700;color:var(--tm);font-size:.9rem;text-transform:uppercase}
+td:first-child{text-align:left;font-weight:600;border-right:1px solid var(--b);background:#fff;width:55%}
+tr.highlight-active td { background-color: var(--wab) !important; border-top: 1px solid var(--a); border-bottom: 1px solid var(--a); }
+
+/* --- VERTICAL MATH STYLING --- */
+.v-math {
+    display: grid; grid-template-columns: auto auto; justify-content: center; align-items: end; column-gap: 15px;
+    font-family: 'Courier New', monospace; font-size: 3.5rem; font-weight: 700; color: var(--t); line-height: 1;
+    background: #fff; padding: 25px 50px; border-radius: 12px; border: 2px solid var(--b);
+    width: fit-content; margin: 20px auto; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+.v-top { grid-column: 2; text-align: right; }
+.v-op { grid-column: 1; grid-row: 2; text-align: right; font-size: 2.8rem; transform: translateY(-5px); }
+.v-bot { grid-column: 2; grid-row: 2; text-align: right; }
+.v-line { grid-column: 1 / span 2; width: 100%; height: 4px; background: var(--t); border-radius: 2px; }
+
+.fb{margin-top:30px;padding:25px;border-radius:10px;display:none;border-left:6px solid transparent;animation:sd .3s ease;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05)}
+@keyframes sd{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.fb.c{background:var(--okb);border-left-color:var(--ok);color:#064e3b}.fb.p{background:var(--wab);border-left-color:var(--wa);color:#78350f}.fb.i{background:var(--erb);border-left-color:var(--er);color:#7f1d1d}
+.fb-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;border-bottom:1px solid rgba(0,0,0,0.1);padding-bottom:10px;font-weight:800;text-transform:uppercase}
+.exp{background:rgba(255,255,255,0.6);padding:15px;border-radius:8px;font-size:1rem;line-height:1.6;border:1px solid rgba(0,0,0,0.08)}
+
+.btn{background:linear-gradient(to bottom,var(--p),var(--pd));color:#fff;border:0;padding:16px;border-radius:8px;font-size:1.1rem;font-weight:700;cursor:pointer;width:100%;margin-top:30px;box-shadow:0 4px 6px rgba(37,99,235,0.3);transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 15px rgba(37,99,235,0.4)}
+
+#res{padding:80px 40px;text-align:center;display:none}
+.gr-grid{background:#fff;border:2px solid var(--b);border-radius:16px;padding:40px;margin:40px 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.05)}
+.stat{font-size:3.5rem;font-weight:900;color:var(--t);margin-bottom:8px;line-height:1}.stat-l{font-size:.85rem;font-weight:700;text-transform:uppercase;color:#94a3b8;letter-spacing:.1em}
+.g-a{color:var(--ok)}.g-b{color:var(--p)}.g-c{color:var(--wa)}.g-d{color:var(--er)}
+</style>
+</head>
+<body>
+<div class="container">
+    <div id="title-page">
+        <div class="math-decor">
+            <div class="sym sym-plus">+</div><div class="sym sym-minus">&minus;</div><div class="sym sym-mult">&times;</div><div class="sym sym-div">&divide;</div>
+        </div>
+        <div class="main-title">SBAC MATH REVIEW</div>
+        <div class="sub-title">Numbers and Operations In Base Ten</div>
+        <button class="start-btn" onclick="enterSite()">Let's Get Started &rarr;</button>
+    </div>
+
+    <header id="main-header">
+        <h1>SBAC Math Review: Numbers and Operations In Base Ten</h1>
+        <button id="exit-btn" class="reset-btn" onclick="location.reload()">Exit Review</button>
+    </header>
+    <div class="pg-bar" id="pg"><div class="pg-fill" id="fill"></div></div>
+
+    <div id="welcome">
+        <div class="hero-t">Select Practice Set</div>
+        <p class="hero-s">Questions are randomized to prevent memorization.</p>
+        <div class="grid">
+            <div class="card" onclick="startQuiz('A')"><span class="icon">📘</span><h3>Set A</h3><p>Original Standard Review</p></div>
+            <div class="card" onclick="startQuiz('B')"><span class="icon">🚀</span><h3>Set B</h3><p>New Numbers Challenge</p></div>
+            <div class="card" onclick="startQuiz('C')"><span class="icon">⭐</span><h3>Set C</h3><p>Advanced Practice Set</p></div>
+        </div>
+    </div>
+
+    <div id="quiz" class="q-card"></div>
+
+    <div id="res">
+        <h2 style="font-size:2.2rem;margin:0 0 10px">Session Complete</h2>
+        <div id="msg" style="color:var(--tm);margin-bottom:30px;font-size:1.2rem"></div>
+        <div class="gr-grid">
+            <div><div class="stat" id="s-pts">0/0</div><div class="stat-l">Points</div></div>
+            <div><div class="stat" id="s-pct">0%</div><div class="stat-l">Score</div></div>
+            <div><div class="stat" id="s-gr">-</div><div class="stat-l">Grade</div></div>
+        </div>
+        <button class="btn" onclick="location.reload()" style="max-width:300px">Return to Menu</button>
+    </div>
+</div>
+
+<script>
+    const speakerIcon = `<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
+
+    function enterSite() {
+        document.getElementById('title-page').style.display = 'none';
+        document.getElementById('main-header').style.display = 'flex';
+        document.getElementById('welcome').style.display = 'block';
+    }
+
+    const dataSetA = [
+        { id: 1, type: 'text', text: "Enter the sum.", html: `<div class="v-math"><div class="v-top">7283</div><div class="v-op">+</div><div class="v-bot">641</div><div class="v-line"></div></div>`, answer: ["7924"], explanation: "7283 + 641 = 7924." },
+        { id: 2, type: 'chk', text: "Jane earned 200 tickets. Select all combinations of items she could buy with her tickets.", subtext: "Prices: Eraser(20), Pencil(20), Pen(20), Folder(50), Marker(50), Notebook(50)", options: ["3 notebooks and 2 pencils", "3 folders, 2 pencils, and 1 pen", "2 notebooks, 2 markers, and 1 pencil", "1 notebook, 1 folder, 1 pencil, 1 pen, and 1 eraser"], answer: [0, 3], explanation: "You need to add up the prices. She can buy any combination that totals 200 or less." },
+        { id: 3, type: 'rad', text: "Select the equation that has the same unknown number as 99 ÷ 11 = □.", options: ["11 × 99 = □", "99 × □ = 11", "11 × □ = 99", "□ × 99 = 11"], answer: 2, explanation: "11 × □ = 99 is the inverse operation." },
+        { id: 4, type: 'chk', text: "Select all TRUE statements for numbers: 8361, 8126, 8347, 8175.", options: ["8361 > 8347 because tens digit is larger.", "8126 < 8175 because tens digit is smaller.", "8175 > 8347 because tens digit is larger.", "8361 < 8175 because hundreds is smaller.", "8126 < 8361 because hundreds is smaller."], answer: [0, 1, 4], explanation: "Check place values carefully." },
+        { id: 5, type: 'text', text: "Enter the product.", html: `<div class="v-math"><div class="v-top">56</div><div class="v-op">×</div><div class="v-bot">20</div><div class="v-line"></div></div>`, answer: ["1120", "1,120"], explanation: "56 × 2 = 112, then add a 0 -> 1120." },
+        { id: 6, type: 'rad', text: "Which expression is equal to 11 × 24?", options: ["(10 + 1) + (20 + 4)", "(10 + 1) × (20 + 4)", "(10 × 1) × (20 × 4)", "(10 × 1) + (20 × 4)"], answer: 1, explanation: "Decompose the numbers: (10+1) × (20+4)." },
+        { id: 7, type: 'text', text: "Round 2837 to the nearest ten.", answer: ["2840", "2,840"], explanation: "The 7 rounds the 3 up to a 4." },
+        { id: 8, type: 'text', text: "Enter the sum.", html: `<div class="v-math"><div class="v-top">7489</div><div class="v-op">+</div><div class="v-bot">6571</div><div class="v-line"></div></div>`, answer: ["14060", "14,060"], explanation: "Sum is 14,060." },
+        { id: 9, type: 'rad', text: "Select the equation with same unknown as 68 ÷ 2 = □.", options: ["2 × 68 = □", "68 × □ = 2", "2 × □ = 68", "□ × 68 = 2"], answer: 2, explanation: "Inverse is 2 × □ = 68." },
+        { id: 10, type: 'text', text: "What digit makes 83,230 > 83,2□9 true?", html: `<h3>83,230 > 83,2 <input type="text" style="width:40px;text-align:center" disabled placeholder="?"> 9</h3>`, answer: ["0", "1", "2"], explanation: "The tens digit must be less than 3." },
+        { id: 11, type: 'text', text: "Round 429,713 to nearest thousand.", answer: ["430000", "430,000"], explanation: "9,713 rounds up, bumping the 29 to 30 -> 430,000." },
+        { id: 12, type: 'mat', text: "Select True or False.", rows: [{ t: "437 < 400 + 30 + 7", c: "false" }, { t: "368 ones = 3 hundreds + 6 tens + 8 ones", c: "true" }, { t: "600 + 20 + 9 < 6 tens + 2 tens + 9 ones", c: "false" }], explanation: "Compare each side." },
+        { id: 13, type: 'rad', text: "Which equals 15 × 12?", options: ["(10 × 10) + (10 × 2) + (10 × 5)", "(10 + 5) × 12 + (10 + 5) × 2", "(10 × 5) + (10 × 2)", "(10 + 5) × (10 + 2)"], answer: 3, explanation: "(10+5) × (10+2)." },
+        { id: 14, type: 'rad', text: "Which statement is always true when multiplying two 2-digit numbers?", options: ["Multiplying numbers less than 59 always gives 4 digits.", "Multiplying numbers less than 98 always gives 4 digits.", "Multiplying numbers greater than 25 always gives 4 digits.", "The product has 3 or 4 digits."], answer: 3, explanation: "The product of two 2-digit numbers is always between 100 (10x10) and 9801 (99x99)." },
+        { id: 15, type: 'mat', text: "True or False?", rows: [{ t: "963 > 9 + 60 + 300", c: "true" }, { t: "7 hundreds + 20 tens = 70 tens + 20 ones", c: "false" }, { t: "8 hundreds + 2 tens + 3 ones > 8 hundreds + 3 tens + 2 ones", c: "false" }], explanation: "Compare values." }
+    ];
+
+    const dataSetB = [
+        { id: 1, type: 'text', text: "Enter the sum.", html: `<div class="v-math"><div class="v-top">6492</div><div class="v-op">+</div><div class="v-bot">753</div><div class="v-line"></div></div>`, answer: ["7245", "7,245"], explanation: "6492 + 753 = 7245." },
+        { id: 2, type: 'chk', text: "Marcus earned 300 tickets. Select all combinations of items he could buy with his tickets.", subtext: "Prices: Sticker(25), Pen(25), Ruler(25), Notebook(50), Binder(75), Calculator(100)", options: ["2 Calculators and 2 Notebooks", "5 Binders", "3 Binders and 3 Pens", "1 Calculator, 1 Binder, 1 Notebook, 1 Pen"], answer: [0, 2, 3], explanation: "Add up the prices. He can afford any option that costs 300 or less." },
+        { id: 3, type: 'rad', text: "Select the equation that has the same unknown number as 108 ÷ 12 = □.", options: ["12 × 108 = □", "108 × □ = 12", "12 × □ = 108", "□ × 108 = 12"], answer: 2, explanation: "12 × □ = 108." },
+        { id: 4, type: 'chk', text: "Select all TRUE statements for numbers: 5472, 5283, 5491, 5264.", options: ["5472 > 5491 because the digit in the tens place is larger in 5472.", "5283 > 5264 because the digit in the tens place is larger in 5283.", "5264 < 5472 because the digit in the hundreds place is smaller in 5264.", "5491 < 5283 because the digit in the hundreds place is smaller in 5491."], answer: [1, 2], explanation: "Compare digits." },
+        { id: 5, type: 'text', text: "Enter the product.", html: `<div class="v-math"><div class="v-top">48</div><div class="v-op">×</div><div class="v-bot">30</div><div class="v-line"></div></div>`, answer: ["1440", "1,440"], explanation: "48 × 30 = 1440." },
+        { id: 6, type: 'rad', text: "Which expression is equal to 12 × 23?", options: ["(10 + 2) + (20 + 3)", "(10 × 2) + (20 × 3)", "(10 + 2) × (20 + 3)", "(10 × 2) × (20 × 3)"], answer: 2, explanation: "(10+2)×(20+3)." },
+        { id: 7, type: 'text', text: "Round 3,942 to the nearest ten.", answer: ["3940", "3,940"], explanation: "The 2 rounds down." },
+        { id: 8, type: 'text', text: "Enter the sum.", html: `<div class="v-math"><div class="v-top">5827</div><div class="v-op">+</div><div class="v-bot">3492</div><div class="v-line"></div></div>`, answer: ["9319", "9,319"], explanation: "Sum is 9,319." },
+        { id: 9, type: 'rad', text: "Select the equation with same unknown as 96 ÷ 3 = □.", options: ["3 × 96 = □", "96 × □ = 3", "3 × □ = 96", "□ × 96 = 3"], answer: 2, explanation: "3 × □ = 96." },
+        { id: 10, type: 'text', text: "What digit makes 57,420 > 57,4□5 true?", html: `<h3>57,420 > 57,4 <input type="text" style="width:40px;text-align:center" disabled placeholder="?"> 5</h3>`, answer: ["0", "1"], explanation: "The tens digit must be less than 2." },
+        { id: 11, type: 'text', text: "Round 639,854 to nearest thousand.", answer: ["640000", "640,000"], explanation: "9854 rounds up -> 640,000." },
+        { id: 12, type: 'mat', text: "Select True or False.", rows: [{ t: "582 < 500 + 90 + 2", c: "true" }, { t: "4 hundreds + 12 tens = 5 hundreds + 2 tens", c: "true" }, { t: "700 + 40 + 5 < 739", c: "false" }], explanation: "Compare sides." },
+        { id: 13, type: 'rad', text: "Which expression is equal to 18 × 14?", options: ["(10 × 10) + (10 × 8) + (10 × 4)", "(10 + 8) × (10 + 4)", "(10 × 8) + (10 × 4)", "(10 + 8) + (10 + 4)"], answer: 1, explanation: "(10+8)(10+4)." },
+        { id: 14, type: 'rad', text: "Which statement is always true when multiplying two 2-digit numbers?", options: ["Multiplying numbers less than 20 always gives 4 digits.", "Multiplying numbers less than 30 always gives 3 digits.", "Multiplying numbers greater than 31 always gives 4 digits.", "Multiplying numbers greater than 10 always gives 3 digits."], answer: 2, explanation: "32x32=1024." },
+        { id: 15, type: 'mat', text: "Select True or False.", rows: [{ t: "842 = 800 + 40 + 2", c: "true" }, { t: "5 hundreds + 2 tens = 52 tens", c: "true" }, { t: "300 + 60 + 8 > 369", c: "false" }], explanation: "Compare." }
+    ];
+
+    const dataSetC = [
+        { id: 1, type: 'text', text: "Enter the sum.", html: `<div class="v-math"><div class="v-top">5184</div><div class="v-op">+</div><div class="v-bot">927</div><div class="v-line"></div></div>`, answer: ["6111", "6,111"], explanation: "5184 + 927 = 6,111." },
+        { id: 2, type: 'chk', text: "Lucas earned 400 tickets. Select all combinations of items he could buy with her tickets.", subtext: "Prices: Eraser(20), Pen(30), Notebook(50), Folder(40), Binder(80)", options: ["5 Binders", "4 Notebooks and 5 Folders", "8 Notebooks", "10 Pens and 2 Erasers"], answer: [0, 1, 2, 3], explanation: "Check total cost. He can afford any option that costs 400 or less." },
+        { id: 3, type: 'rad', text: "Select the equation that has the same unknown number as 132 ÷ 11 = □.", options: ["132 × □ = 11", "11 × □ = 132", "11 × 132 = □", "□ × 132 = 11"], answer: 1, explanation: "11 × □ = 132." },
+        { id: 4, type: 'chk', text: "Select all TRUE statements for numbers: 6382, 6154, 6391, 6129.", options: ["6382 > 6154 because the digit in the hundreds place is larger in 6382.", "6129 > 6391 because the digit in the tens place is larger in 6129.", "6154 < 6382 because the digit in the hundreds place is smaller in 6154.", "6391 < 6129 because the digit in the tens place is smaller in 6391."], answer: [0, 2], explanation: "Compare digits." },
+        { id: 5, type: 'text', text: "Enter the product.", html: `<div class="v-math"><div class="v-top">64</div><div class="v-op">×</div><div class="v-bot">40</div><div class="v-line"></div></div>`, answer: ["2560", "2,560"], explanation: "64 × 4 = 256, add 0 -> 2560." },
+        { id: 6, type: 'rad', text: "Which expression is equal to 13 × 22?", options: ["(10 + 3) × (20 + 2)", "(10 × 3) + (20 × 2)", "(10 + 20) × (3 + 2)", "None"], answer: 0, explanation: "Decompose: (10+3) × (20+2)." },
+        { id: 7, type: 'text', text: "Round 4,826 to the nearest ten.", answer: ["4830", "4,830"], explanation: "6 rounds up." },
+        { id: 8, type: 'text', text: "Enter the sum.", html: `<div class="v-math"><div class="v-top">4928</div><div class="v-op">+</div><div class="v-bot">2183</div><div class="v-line"></div></div>`, answer: ["7111", "7,111"], explanation: "Sum is 7,111." },
+        { id: 9, type: 'rad', text: "Select the equation with same unknown as 84 ÷ 4 = □.", options: ["4 × □ = 84", "84 × □ = 4", "□ × 84 = 4", "4 × 84 = □"], answer: 0, explanation: "4 × □ = 84." },
+        { id: 10, type: 'text', text: "What digit makes 63,520 > 63,5□8 true?", html: `<h3>63,520 > 63,5 <input type="text" style="width:40px;text-align:center" disabled placeholder="?"> 8</h3>`, answer: ["0", "1"], explanation: "The tens digit must be less than 2." },
+        { id: 11, type: 'text', text: "Round 519,632 to nearest thousand.", answer: ["520000", "520,000"], explanation: "9632 rounds up -> 520,000." },
+        { id: 12, type: 'mat',text: "Select True or False.", rows: [{ t: "743 < 700 + 40 + 3", c: "false" }, { t: "620 = 500 + 120", c: "true" }, { t: "905 > 899 + 10", c: "false" }], explanation: "Compare values." },
+        { id: 13, type: 'rad', text: "Which expression is equal to 16 × 13?", options: ["(10 × 10) + (10 × 3) + (6 × 10) + (6 × 3)", "(10 + 6) + (10 + 3)", "(10 × 6) × (10 × 3)", "(10 + 6) + (10 + 3)"], answer: 0, explanation: "Area model decomposition." },
+        { id: 14, type: 'rad', text: "Which statement is always true when multiplying two 2-digit numbers?", options: ["Product < 100", "Product > 100", "Product > 1000", "The product has 3 or 4 digits."], answer: 3, explanation: "10x10=100 (3), 99x99=9801 (4)." },
+        { id: 15, type: 'mat', text: "Select True or False.", rows: [{ t: "529 = 500 + 20 + 9", c: "true" }, { t: "3 hundreds < 290", c: "false" }, { t: "450 + 50 = 5 hundreds", c: "true" }], explanation: "Compare." }
+    ];
+
+    let activeQuestions = [];
+    let currentQ = 0;
+    let earnedPoints = 0;
+    let totalPointsPossible = 0;
+    let currentMode = null;
+    let btnLocked = false;
+
+    let currentlyHighlighted = null;
+    function speakText(text, btnElement, containerId) {
+        window.speechSynthesis.cancel();
+        
+        if (currentlyHighlighted) {
+            currentlyHighlighted.classList.remove('highlight-active');
+        }
+
+        let container = null;
+        if (containerId) {
+            container = document.getElementById(containerId);
+        } else if (btnElement) {
+            container = btnElement.closest('.lbl') || 
+                        btnElement.closest('.q-box') || 
+                        btnElement.closest('tr');
+        }
+
+        if (container) {
+            container.classList.add('highlight-active');
+            currentlyHighlighted = container;
+        }
+
+        let spokenText = text;
+        spokenText = spokenText.replace(/÷/g, " divided by ");
+        spokenText = spokenText.replace(/×/g, " times ");
+        spokenText = spokenText.replace(/□/g, " box ");
+        spokenText = spokenText.replace(/=/g, " equals ");
+        spokenText = spokenText.replace(/\+/g, " plus ");
+
+        const utterance = new SpeechSynthesisUtterance(spokenText);
+        utterance.rate = 1.0; 
+        
+        utterance.onend = () => {
+            if (container) container.classList.remove('highlight-active');
+            currentlyHighlighted = null;
+        };
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function enableExitGuard() { window.onbeforeunload = () => "Are you sure?"; }
+    function disableExitGuard() { window.onbeforeunload = null; }
+
+    function startQuiz(mode) {
+        try {
+            currentMode = mode;
+            let rawData;
+            if (mode === 'A') rawData = dataSetA;
+            else if (mode === 'B') rawData = dataSetB;
+            else rawData = dataSetC;
+
+            activeQuestions = shuffleArray(JSON.parse(JSON.stringify(rawData)));
+            
+            currentQ = 0;
+            earnedPoints = 0;
+            totalPointsPossible = activeQuestions.reduce((sum, q) => {
+                if (q.type === 'matrix') return sum + q.rows.length;
+                return sum + 1;
+            }, 0);
+
+            document.getElementById('welcome').style.display = 'none';
+            document.getElementById('pg').style.display = 'block';
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('exit-btn').style.display = 'none';
+            enableExitGuard();
+            
+            renderQuestion();
+        } catch(e) {
+            alert("Error loading quiz: " + e.message);
+        }
+    }
+
+    function renderQuestion() {
+        btnLocked = false;
+        const q = activeQuestions[currentQ];
+        const area = document.getElementById('quiz');
+        area.innerHTML = '';
+
+        const card = document.createElement('div');
+        card.className = 'q-card active';
+
+        let maxPts = (q.type === 'matrix') ? q.rows.length : 1;
+
+        let html = `
+            <div class="meta">
+                <span class="bdg">Set ${currentMode} &bull; Q${currentQ + 1}</span>
+                <span class="pts">${maxPts} Pt${maxPts > 1 ? 's' : ''}</span>
+            </div>
+            
+            <div class="q-box">
+                <div class="q-header-row">
+                    <div class="q-txt">${q.text}</div>
+                    <button class="tts-btn" onclick="speakText('${q.text.replace(/'/g, "\\'")}', this)">${speakerIcon} Listen</button>
+                </div>`;
+        
+        if (q.html) html += q.html;
+        if (q.subtext) html += `<p style="color:#64748b; font-size:0.9rem; margin-top:5px;">${q.subtext}</p>`;
+        
+        html += `</div>`;
+
+        if (q.type === 'text') {
+            html += `<input type="text" id="ans-text" placeholder="Type answer...">`;
+        } else if (q.type === 'rad') {
+            let opts = q.options.map((t, i) => ({ txt: t, idx: i }));
+            shuffleArray(opts);
+            html += `<div class="opts">`;
+            opts.forEach((opt) => {
+                html += `
+                <label class="lbl">
+                    <div class="lbl-content">
+                        <input type="radio" name="opt" value="${opt.idx}"> 
+                        <span>${opt.txt}</span>
+                    </div>
+                    <button class="tts-btn" onclick="speakText('${opt.txt.replace(/'/g, "\\'")}', this)">${speakerIcon} Listen</button>
+                </label>`;
+            });
+            html += `</div>`;
+        } else if (q.type === 'chk') {
+            let opts = q.options.map((t, i) => ({ txt: t, idx: i }));
+            shuffleArray(opts);
+            html += `<div class="opts">`;
+            opts.forEach((opt) => {
+                html += `
+                <label class="lbl">
+                    <div class="lbl-content">
+                        <input type="checkbox" name="chk" value="${opt.idx}"> 
+                        <span>${opt.txt}</span>
+                    </div>
+                    <button class="tts-btn" onclick="speakText('${opt.txt.replace(/'/g, "\\'")}', this)">${speakerIcon} Listen</button>
+                </label>`;
+            });
+            html += `</div>`;
+        } else if (q.type === 'mat') {
+            let rows = [...q.rows];
+            shuffleArray(rows);
+            html += `<div class="mx-box"><table>
+                <thead><tr><th>Statement</th><th>True</th><th>False</th></tr></thead>
+                <tbody>`;
+            rows.forEach((row, i) => {
+                html += `<tr data-c="${row.c}">
+                    <td>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span>${row.t}</span>
+                            <button class="tts-btn" onclick="speakText('${row.t.replace(/'/g, "\\'")}', this)">${speakerIcon} Listen</button>
+                        </div>
+                    </td>
+                    <td><input type="radio" name="mx${i}" value="true"></td>
+                    <td><input type="radio" name="mx${i}" value="false"></td>
+                </tr>`;
+            });
+            html += `</tbody></table></div>`;
+        }
+
+        html += `<div id="fb" class="fb"></div>`;
+        html += `<button id="sbtn" class="btn" onclick="check()">Submit Answer</button>`;
+        
+        card.innerHTML = html;
+        area.appendChild(card);
+        
+        const pct = ((currentQ) / activeQuestions.length) * 100;
+        document.getElementById('fill').style.width = pct + '%';
+    }
+
+    function check() {
+        if (btnLocked) {
+            if (currentQ < activeQuestions.length - 1) {
+                currentQ++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+            return;
+        }
+
+        const q = activeQuestions[currentQ];
+        const fb = document.getElementById('fb');
+        let pts = 0;
+        let max = (q.type === 'mat') ? q.rows.length : 1;
+
+        if (q.type === 'text') {
+            const val = document.getElementById('ans-text').value.trim().replace(/,/g, '');
+            if (q.answer.includes(val)) pts = 1;
+        } else if (q.type === 'rad') {
+            const el = document.querySelector('input[name="opt"]:checked');
+            if (el && parseInt(el.value) === q.answer) pts = 1;
+        } else if (q.type === 'chk') {
+            const els = Array.from(document.querySelectorAll('input[name="chk"]:checked')).map(e => parseInt(e.value));
+            if (JSON.stringify(els.sort()) === JSON.stringify(q.answer.sort())) pts = 1;
+        } else if (q.type === 'mat') {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach((tr, i) => {
+                const el = tr.querySelector(`input[name="mx${i}"]:checked`);
+                if (el && el.value === tr.dataset.c) pts++;
+            });
+        }
+
+        earnedPoints += pts;
+
+        fb.style.display = 'block';
+        fb.className = `fb ${pts===max ? 'c' : (pts>0 ? 'p' : 'i')}`;
+        
+        fb.innerHTML = `
+            <div class="fb-head">
+                <span>${pts>0 ? '+'+pts : '0'} Pts &bull; ${pts===max ? 'Correct!' : 'Incorrect'}</span>
+                <button class="tts-btn" onclick="speakText('${q.explanation.replace(/'/g, "\\'").replace(/<br>/g, " ")}')">🔊 Listen</button>
+            </div>
+            <div class="exp">
+                <b>Explanation:</b><br>
+                ${q.explanation}
+            </div>`;
+
+        document.getElementById('sbtn').innerText = (currentQ < activeQuestions.length - 1) ? "Next Question" : "View Results";
+        btnLocked = true;
+    }
+
+    function showResults() {
+        disableExitGuard();
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('res').style.display = 'block';
+        document.getElementById('fill').style.width = '100%';
+        document.getElementById('exit-btn').style.display = 'block'; 
+
+        document.getElementById('s-pts').innerText = `${earnedPoints}/${totalPointsPossible}`;
+        const percent = Math.round((earnedPoints / totalPointsPossible) * 100);
+        document.getElementById('s-pct').innerText = `${percent}%`;
+
+        let l = 'F', c = 'g-d', m = "Keep practicing. You can do this!";
+        if (percent >= 90) { l = 'A'; c = 'g-a'; m = "Outstanding work! You've mastered this."; }
+        else if (percent >= 80) { l = 'B'; c = 'g-b'; m = "Great job! You're doing very well."; }
+        else if (percent >= 70) { l = 'C'; c = 'g-c'; m = "Good effort. Review the missed questions."; }
+        else if (percent >= 60) { l = 'D'; c = 'g-d'; m = "You're getting there. Try again!"; }
+
+        const el = document.getElementById('s-gr');
+        el.innerText = l;
+        el.className = `stat ${c}`;
+        document.getElementById('msg').innerText = m;
+    }
+</script>
+</body>
+</html>
